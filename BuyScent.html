@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <div class="bg-gray-800 text-white w-64 p-6 flex-shrink-0">
+      <div class="flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold">BUYS Scents</a>
+        <button id="menuToggle" class="md:hidden focus:outline-none">
+          <i class="fa-solid fa-bars text-3xl text-purple-500"></i>
+        </button>
+      </div>
+
+      <nav id="sidebarMenu" class="hidden md:block space-y-6 mt-10">
+        <!-- Menu Section -->
+        <div class="space-y-4">
+          <h1 class="text-sm font-bold uppercase text-gray-400">Menu</h1>
+          <a href="#" data-target="Dashboard" class="block w-full text-left hover:bg-gray-700 rounded px-4 py-2">Dashboard</a>
+          <a href="#" data-target="Calendar" class="block w-full text-left hover:bg-gray-700 rounded px-4 py-2">Calendar</a>
+          <a href="#" data-target="Users" class="block w-full text-left hover:bg-gray-700 rounded px-4 py-2">Users</a>
+        </div>
+
+        <!-- Support Section -->
+        <div class="space-y-4 mt-10">
+          <h1 class="text-sm font-bold uppercase text-gray-400">Support</h1>
+          <a href="#" data-target="Messages" class="block w-full text-left hover:bg-gray-700 rounded px-4 py-2">Messages</a>
+          <a href="#" data-target="Invoice" class="block w-full text-left hover:bg-gray-700 rounded px-4 py-2">Invoice</a>
+        </div>
+
+        <!-- Stocks Section -->
+        <div class="space-y-4 mt-10">
+          <h1 class="text-sm font-bold uppercase text-gray-400">Stocks</h1>
+          <a href="#" data-target="Stocks" class="block w-full text-left hover:bg-gray-700 rounded px-4 py-2">Stocks</a>
+          <a href="#" data-target="Orders" class="block w-full text-left hover:bg-gray-700 rounded px-4 py-2">Orders</a>
+          <a href="#" data-target="Shipping" class="block w-full text-left hover:bg-gray-700 rounded px-4 py-2">Shipping</a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-6 overflow-auto">
+      <!-- Dashboard Section -->
+      <section id="Dashboard" class="hidden">
+        <div class="grid grid-cols-3 gap-5 h-36">
+            <div class="bg-white p-4 rounded shadow-outline shadow-xl">
+              <h2 class="text-lg font-semibold">34.6K</h2>
+              <p class="text-sm text-gray-500">Total Sales Today</p>
+            </div>
+
+            <div class="bg-white p-4 rounded hadow-outline shadow-xl">
+              <h2 class="text-lg font-semibold">4.6K</h2>
+              <p class="text-sm text-gray-500">Site Visits Today</p>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow-outline shadow-xl">
+              <h2 class="text-lg font-semibold">4.6K</h2>
+              <p class="text-sm text-gray-500">Pending Sales</p>
+            </div>
+        </div><br><br>
+        
+        <div class="grid grid-rows-1">
+            <div class="bg-white rounded shadow-outline shadow-xl p-4 w-64">
+                <h2 class="text-lg font-semibold">Upcoming Company Events</h2>
+            </div><br>
+            <div class="bg-white rounded shadow-outline shadow-xl p-4 w-64">
+                <h2 class="text-lg font-semibold">Messages</h2>
+            </div>
+        </div>
+
+      </section>
+
+      <!-- Calendar Section -->
+      <section id="Calendar" class="hidden">
+        <h1 class="text-2xl font-bold text-left">Calendar</h1>
+        <p class="text-gray-600 text-left">calendar section content.</p>
+      </section>
+
+      <!-- Users Section -->
+      <section id="Users" class="hidden">
+        <h1 class="text-2xl font-bold text-left">Users</h1>
+        <p class="text-gray-600 text-left">Manage your users here.</p>
+      </section>
+
+      <!-- Messages Section -->
+      <section id="Messages" class="hidden">
+        <h1 class="text-2xl font-bold text-left">Messages</h1>
+        <p class="text-gray-600 text-left">View messages here.</p>
+      </section>
+
+      <!-- Invoice Section -->
+      <section id="Invoice" class="hidden">
+        <h1 class="text-2xl font-bold text-left">Invoice</h1>
+        <p class="text-gray-600 text-left">Manage invoices here.</p>
+      </section>
+
+      <!-- Stocks Section -->
+      <section id="Stocks" class="hidden">
+        <h1 class="text-2xl font-bold text-left">Stocks</h1>
+        <p class="text-gray-600 text-left">stocks here.</p>
+      </section>
+
+      <!-- Orders Section -->
+      <section id="Orders" class="hidden">
+        <h1 class="text-2xl font-bold text-left">Orders</h1>
+        <p class="text-gray-600 text-left">Manage customer orders.</p>
+      </section>
+
+      <!-- Shipping Section -->
+      <section id="Shipping" class="hidden">
+        <h1 class="text-2xl font-bold text-left">Shipping</h1>
+        <p class="text-gray-600 text-left">Track shipping details here.</p>
+      </section>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll("section");
+      sections.forEach(section => section.classList.add("hidden")); 
+
+      const targetSection = document.getElementById(sectionId);
+      if (targetSection) {
+        targetSection.classList.remove("hidden"); 
+      }
+    }
+    const links = document.querySelectorAll("[data-target]");
+    links.forEach(link => {
+      link.addEventListener("click", event => {
+        event.preventDefault(); 
+        const target = event.target.getAttribute("data-target");
+        showSection(target); 
+      });
+    });
+    showSection("Dashboard");
+  </script>
+</body>
+</html>
